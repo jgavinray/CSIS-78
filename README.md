@@ -1,5 +1,7 @@
-CSIS-78 PHP and MySQL Websites
+Gavilan College
+CSIS 78 - PHP and MySQL Websites (Spring 2013)
+Professor: Luis Barreto
+Students: J. Gavin Ray & Johnathan Adams
 
-This git repository is the combined coursework of J. Gavin Ray and Johnathon Adam. Spring 2013 @ Gavilan College.
 
-Instructor is Luis Barreto.
+This git repository is the team project coursework of team Axiom.
