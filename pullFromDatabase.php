@@ -4,7 +4,7 @@
 //  This file is a sample of how to pull from the MySQL databse
 //  directly into the PHP documents
 
-//  The following code is from Mr. Luis Barreto:
+//  A majority of the following code is from Mr. Luis Barreto:
  $link = mysqli_connect('localhost','root','','product');
  
  if (!$link)
