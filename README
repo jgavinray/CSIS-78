@@ -27,7 +27,7 @@ ever is the quickest and easiest method of implementation).  This data shall be
 injected into a "product" database for use later.
 
 A "user" type account shall be able to view all of the contents of a database in
-which they are associated with, in other words 1 "user" shall have access to one
+which they are associated with, in other words a "user" shall have access to one
 database.  Within the confines of the one database restriction, a "user" shall be
 able to view the contents of the database.  A "user" shall also be able to
 manually input one row of raw data into the database.  A "user" shall be able to
