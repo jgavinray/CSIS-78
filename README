@@ -3,5 +3,71 @@ CSIS 78 - PHP and MySQL Websites (Spring 2013)
 Professor: Luis Barreto
 Students: J. Gavin Ray & Johnathan Adams
 
-
 This git repository is the team project coursework of team Axiom.
+
+The creator of this project is J. Gavin Ray as of 3/10/13 Mr. Johnathan
+Adams has agreed to release all rights of this project to J. Gavin Ray provided
+that acknowledgements of his contributions are included in the documentation.
+
+The initial project proposal is found within the "CSIS-78 Project Proposal.doc"
+file, which is included in this Git.
+
+
+3/10/13
+Today Mr. Ray and Mr. Adams met to discuss the implementations of this system in
+regards to what each "Actor" is responsible for.  The following is a rough
+description of what will be needed.  This list will be updated with more details
+as needed, or possible.
+
+
+General Overview on how this software works:
+A Rice Lake 920i shall stream data to our program through telnet, https, or comma
+delimited file (at this point it has yet to be determined, but it will be which
+ever is the quickest and easiest method of implementation).  This data shall be
+injected into a "product" database for use later.
+
+A "user" type account shall be able to view all of the contents of a database in
+which they are associated with, in other words 1 "user" shall have access to one
+database.  Within the confines of the one database restriction, a "user" shall be
+able to view the contents of the database.  A "user" shall also be able to
+manually input one row of raw data into the database.  A "user" shall be able to
+import a comma delimited file into the database in which the "user" is 
+associated with.
+
+A "supervisor" type account shall inherit all of the abilities of an "user" 
+account however it will also have additional functions.  A "supervisor" account
+shall expand the ability of the "user" by having the ability to edit and delete
+data contained within the database it is associated with.  A "supervisor" account
+shall also have the ability to add "users" to its respective database thus
+granting full "user" access.  A "supervisor" account shall be able to generate
+and export PDF reports based on the contents of the database it is associated with.
+
+An "administrator" type account shall inherit all of the abilities of both 
+"supervisor" and "user" accounts however it will also have additional functions.
+An "administrator" type account shall expand the ability of the "supervisor" by
+having the ability to create, edit, and delete databases within the system.  The
+"administrator" type account shall also be able to add "supervisor" and "user" type
+accounts to the system.  In addition to the ability to create accounts, the
+"administrator" shall be able to change the databases in which "supervisor" and
+"user" type accounts are associated with.
+ 
+
+Actor "Rice Lake 920i":
+Stream raw data either via a telnet connection, https socket connection, or into
+a comma delimited file for injection into an MySQL Database.  The data to be
+transmitted:
+
+Product Number (int), Product Name (string), Lot # (int), Number in Batch (int), Target Weight (float), Actual Weight (float), Date/Time
+
+The programming of the Rice Lake 920i and the injection of raw data into a 
+database shall be handled by J. Gavin Ray.
+
+
+Actor "User":
+To Be Added
+
+Actor "Supervisor":
+To Be Added
+
+Actor "Administrator":
+To Be Added
