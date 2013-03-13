@@ -4,14 +4,24 @@
 <?php
 
 $appleMacBookPro = new computer;
+$lameWindowsMachine = new computer;
+
+$lameWindowsMachine->setCPU("Over Taxed with garbage");
+$lameWindowsMachine->setRAM("Not Enough");
+$lameWindowsMachine->setHD("HD Full of Virus'");
 
 $appleMacBookPro->setCPU("Quad Core");
 $appleMacBookPro->setRAM("16 Gigs");
 $appleMacBookPro->setHD("512 GB SSD");
 
-$appleMacBookPro->getCPU();
-$appleMacBookPro->getRAM();
-$appleMacBookPro->getHD();
+echo "<p>".$appleMacBookPro->getCPU()."<br>";
+echo $appleMacBookPro->getRAM()."<br>";
+echo $appleMacBookPro->getHD()."<br>";
+
+echo "<p>".$lameWindowsMachine->getCPU()."<br>";
+echo $lameWindowsMachine->getRAM()."<br>";
+echo $lameWindowsMachine->getHD()."<br>";
+
 class computer 
 {
     private $CPU;
