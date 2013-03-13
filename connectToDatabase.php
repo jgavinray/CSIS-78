@@ -23,7 +23,7 @@ if ($result = mysqli_query($link,$query))
     // fetch associative array
     while ($row = mysqli_fetch_assoc($result))
     {
-        printf("%s(%s)\n", $row["ID"],$row["name"],$row["lot"],$row["batchSize"],$row["numberInBatch"],$row["targetWeight"],$row["actualWight"],$row["dateTime"]);
+        printf("%s(%s)%s(%s)%s(%s)%s(%s)\n", $row["ID"],$row["name"],$row["lot"],$row["batchSize"],$row["numberInBatch"],$row["targetWeight"],$row["actualWight"],$row["dateTime"]);
     }
 }
 // End Luis Barreto Contribution
