@@ -18,21 +18,27 @@ if (mysqli_connect_errno()) {
     exit();
 }
 else
-    echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
+    echo 'Great Success... '.mysqli_get_host_info($link)."<p>\n"; 
 
-/* Create table doesn't return a resultset */
-if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {
-//if (mysqli_query($link, "CREATE TABLE secondTest LIKE Test") === TRUE) {
+
+if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {    // Creates a temporary table in memory
+//if (mysqli_query($link, "CREATE TABLE secondTest LIKE Test") === TRUE) {      // This creates a permanent tables
     printf("<br>Table productDetailDuplicate successfully created.\n");
 }
 else
     printf("<br>Failure creating the table\n");
 
 /* Select queries return a resultset */
-if ($result = mysqli_query($link, "SELECT * FROM productDetails LIMIT 10")) {
-    
+if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This if check is looking to see if the query is TRUE.
     $info = mysqli_fetch_array($result);
-    printf("<br>ID: %s", $info['ID']);
+    
+ //   foreach($info as $element)
+    for ($i = 0; $i <= 7; $i++)
+{ 
+        echo '<br>Contents of $info['.$i.']'." are: ".$info[$i];      
+}
+//   $info = mysqli_fetch_array($result);  // Original location
+    printf("<p>ID: %s", $info['ID']);
     printf("<br>Name: %s", $info['name']);
     printf("<br>Lot: %s", $info['lot']);
     printf("<br>Batch Size: %s", $info['batchSize']);
@@ -52,17 +58,19 @@ else
     
 
 /* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
-if ($result = mysqli_query($link, "SELECT ID FROM Test", MYSQLI_USE_RESULT)) {
+/*
+ 
+//  For some reason this method keep throwing an error, so I've diabled it for the
+//  time being to make sure it isn't interfering with any other sections of the
+//  code in the program.    -- J. Gavin Ray 3/16/2013
+if ($result = mysqli_query($link, "SELECT ID FROM productDetails", MYSQLI_USE_RESULT)) {
 
-    /* Note, that we can't execute any functions which interact with the
-       server until result set was closed. All calls will return an
-       'out of sync' error */
     if (!mysqli_query($link, "SET @a:='this will not work'")) {
         printf("<br>Error: %s\n", mysqli_error($link));
     }
     mysqli_free_result($result);
 }
-
+*/
 mysqli_close($link);
 
  ?>
