@@ -10,7 +10,7 @@
 //$mysqli = new mysqli("localhost", "root", "", "product");
 
 //$newLink = mysqli_connect("localhost", "root", "", "product");    // New object to acces the product database
-$link = mysqli_connect("localhost", "root", "", "test");
+$link = mysqli_connect("localhost", "root", "", "product");
 
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -21,38 +21,32 @@ else
     echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
 
 /* Create table doesn't return a resultset */
-if (mysqli_query($link, "CREATE TEMPORARY TABLE secondTest LIKE Test") === TRUE) {
+if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {
 //if (mysqli_query($link, "CREATE TABLE secondTest LIKE Test") === TRUE) {
-    printf("<br>Table secondTest successfully created.\n");
+    printf("<br>Table productDetailDuplicate successfully created.\n");
 }
 else
     printf("<br>Failure creating the table\n");
 
 /* Select queries return a resultset */
-if ($result = mysqli_query($link, "SELECT * FROM Test LIMIT 10")) {
+if ($result = mysqli_query($link, "SELECT * FROM productDetails LIMIT 10")) {
     
-   
-    do {
-        /* store first result set */
-        if ($result = mysqli_store_result($link)) {
-            while ($row = mysqli_fetch_row($result)) {
-                printf("%s\n", $row[0]);
-            }
-            mysqli_free_result($result);
-        }
-        /* print divider */
-        if (mysqli_more_results($link)) {
-            printf("-----------------\n");
-        }
-    } while (mysqli_next_result($link));
-}
-//    printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
-//    printf("<br>Select returned %d fields.\n", mysqli_num_fields($result));
-//    printf("<br>%s", $result);    // Tried to show the results as a string, its not happy
+    $info = mysqli_fetch_array($result);
+    printf("<br>ID: %s", $info['ID']);
+    printf("<br>Name: %s", $info['name']);
+    printf("<br>Lot: %s", $info['lot']);
+    printf("<br>Batch Size: %s", $info['batchSize']);
+    printf("<br>Number in Batch: %s", $info['numberInBatch']);
+    printf("<br>Target Weight: %s", $info['targetWeight']);
+    printf("<br>Actual Weight: %s", $info['actualWeight']);
+    printf("<br>Time: %s", $info['dateTime']);
+    printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
+    printf("<br>Select returned %d fields.\n", mysqli_num_fields($result));
+
 
     /* free result set */
-//    mysqli_free_result($result);
-//}
+    mysqli_free_result($result);
+}
 else
     printf("<br>Failure selecting rows\n");
     
@@ -70,19 +64,5 @@ if ($result = mysqli_query($link, "SELECT ID FROM Test", MYSQLI_USE_RESULT)) {
 }
 
 mysqli_close($link);
-/*
- * 
- 
-$sql = 'SELECT * FROM productDetails'; 
-$link = mysqli_connect('localhost','root','','product');
 
-$result = mysqli_query($link, $sql);
- 
- if (!$link)
- {
-     die('Connect Error('.myspli_connect_errno().')'.myspli_connect_error());
- }
- 
- echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
-*/
  ?>
