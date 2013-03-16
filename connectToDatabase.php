@@ -1,15 +1,12 @@
 <?php
 //  Created by J. Gavin Ray on 3/11/13.
 //  Copyright (c) 2013 J. Gavin Ray. All rights reserved.
-//  This file is a sample of how to connect to a MySQL databse
-//  directly into the PHP documents
+//  Last Update on 3/16/13 by J. Gavin Ray
+//  This file is contains samples of how to connect to a 
+//  MySQL databse directly into the PHP documents, and then
+//  query/display data directly to the web browser.
 
 
-//  The database parameter's were implemented by J. Gavin Ray.
-
-//$mysqli = new mysqli("localhost", "root", "", "product");
-
-//$newLink = mysqli_connect("localhost", "root", "", "product");    // New object to acces the product database
 $link = mysqli_connect("localhost", "root", "", "product");
 
 /* check connection */
