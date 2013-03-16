@@ -30,13 +30,29 @@ else
 
 /* Select queries return a resultset */
 if ($result = mysqli_query($link, "SELECT * FROM Test LIMIT 10")) {
-    printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
-    printf("<br>Select returned %d fields.\n", mysqli_num_fields($result));
- //   printf("<br>%s", $result);    // Tried to show the results as a string, its not happy
+    
+   
+    do {
+        /* store first result set */
+        if ($result = mysqli_store_result($link)) {
+            while ($row = mysqli_fetch_row($result)) {
+                printf("%s\n", $row[0]);
+            }
+            mysqli_free_result($result);
+        }
+        /* print divider */
+        if (mysqli_more_results($link)) {
+            printf("-----------------\n");
+        }
+    } while (mysqli_next_result($link));
+}
+//    printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
+//    printf("<br>Select returned %d fields.\n", mysqli_num_fields($result));
+//    printf("<br>%s", $result);    // Tried to show the results as a string, its not happy
 
     /* free result set */
-    mysqli_free_result($result);
-}
+//    mysqli_free_result($result);
+//}
 else
     printf("<br>Failure selecting rows\n");
     
