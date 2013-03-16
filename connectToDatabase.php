@@ -20,22 +20,46 @@ else
 
 if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {    // Creates a temporary table in memory
 //if (mysqli_query($link, "CREATE TABLE secondTest LIKE Test") === TRUE) {      // This creates a permanent tables
-    printf("<br>Table productDetailDuplicate successfully created.\n");
+    printf("<br>Table productDetailDuplicate successfully created.<p>\n");
 }
 else
     printf("<br>Failure creating the table\n");
 
+//  Auto generating a table via MySQL by J. Gavin Ray on 3/16/2013
+//  To be done to this, the for loop use to fill the table has a static
+//  number of 8 (which may or may not change).  However the for loop
+//  that displays the contents of the loaded array only loops once.
+//  Another for loop with a variable declaration for the maximum iterations
+//  will need to be implemented to ensure that the table is populated properly.
+
+//  Also I should probably do away completely with the table and implement CSS
+//  styles in place so that they can be easier modified and adjusted.
+
 /* Select queries return a resultset */
 if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This if check is looking to see if the query is TRUE.
-    $info = mysqli_fetch_array($result);
     
- //   foreach($info as $element)
-    for ($i = 0; $i <= 7; $i++)
+    $info = mysqli_fetch_array($result);
+   
+    printf("<table border=1><tr>");
+   
+    while ($fieldInfo = mysqli_fetch_field($result)) {
+
+        printf("<td>%s</td>", $fieldInfo->name);
+
+    }
+   
+    printf("</tr><tr>");
+   
+   for ($i = 0; $i < 8; $i++)
 { 
-        echo '<br>Contents of $info['.$i.']'." are: ".$info[$i];      
+        printf("<td>%s</td>", $info[$i]);      
 }
+   printf("</tr></table>");  
+     
 //   $info = mysqli_fetch_array($result);  // Original location
-    printf("<p>ID: %s", $info['ID']);
+//  From here below was the prototype for the above code
+/*
+   printf("<p>%s", $info['ID']);
     printf("<br>Name: %s", $info['name']);
     printf("<br>Lot: %s", $info['lot']);
     printf("<br>Batch Size: %s", $info['batchSize']);
@@ -45,14 +69,18 @@ if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This 
     printf("<br>Time: %s", $info['dateTime']);
     printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
     printf("<br>Select returned %d fields.\n", mysqli_num_fields($result));
-
-
+*/    
     /* free result set */
     mysqli_free_result($result);
 }
 else
     printf("<br>Failure selecting rows\n");
     
+
+// New stuffs:
+$info = mysqli_fetch_array(mysqli_query($link, "SELECT * FROM productDetails"));
+
+
 
 /* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 /*
