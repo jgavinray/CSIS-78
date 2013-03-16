@@ -4,27 +4,65 @@
 //  This file is a sample of how to connect to a MySQL databse
 //  directly into the PHP documents
 
-//  The following code is from Mr. Luis Barreto:
+
 //  The database parameter's were implemented by J. Gavin Ray.
- $link = mysqli_connect('localhost','root','','product');
+
+//$mysqli = new mysqli("localhost", "root", "", "product");
+$link = mysqli_connect("localhost", "root", "", "test");
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+else
+    echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
+
+/* Create table doesn't return a resultset */
+if (mysqli_query($link, "CREATE TEMPORARY TABLE secondTest LIKE Test") === TRUE) {
+//if (mysqli_query($link, "CREATE TABLE secondTest LIKE Test") === TRUE) {
+    printf("<br>Table secondTest successfully created.\n");
+}
+else
+    printf("<br>Failure creating the table\n");
+
+/* Select queries return a resultset */
+if ($result = mysqli_query($link, "SELECT * FROM Test LIMIT 10")) {
+    printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
+
+    /* free result set */
+    mysqli_free_result($result);
+}
+else
+    printf("<br>Failure selecting rows\n");
+    
+
+/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
+if ($result = mysqli_query($link, "SELECT * FROM Test", MYSQLI_USE_RESULT)) {
+
+    /* Note, that we can't execute any functions which interact with the
+       server until result set was closed. All calls will return an
+       'out of sync' error */
+    if (!mysqli_query($link, "SET @a:='this will not work'")) {
+        printf("<br>Error: %s\n", mysqli_error($link));
+    }
+    mysqli_free_result($result);
+}
+
+mysqli_close($link);
+/*
+ * 
+ 
+$sql = 'SELECT * FROM productDetails'; 
+$link = mysqli_connect('localhost','root','','product');
+
+$result = mysqli_query($link, $sql);
  
  if (!$link)
  {
      die('Connect Error('.myspli_connect_errno().')'.myspli_connect_error());
  }
  
- echo 'Great Success... '.mysqli_get_host_info($link)."\n";
- 
-  
- $query = "SELECT ID, name, lot, batchSize, numberInBatch, targetWeight, actualWeight, dateTime FROM product details";
-
-if ($result = mysqli_query($link,$query))
-{
-    // fetch associative array
-    while ($row = mysqli_fetch_assoc($result))
-    {
-        printf("%s(%s)%s(%s)%s(%s)%s(%s)\n", $row["ID"],$row["name"],$row["lot"],$row["batchSize"],$row["numberInBatch"],$row["targetWeight"],$row["actualWight"],$row["dateTime"]);
-    }
-}
-// End Luis Barreto Contribution
-?>
+ echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
+*/
+ ?>
