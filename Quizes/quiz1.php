@@ -44,6 +44,7 @@ class computer
         $this->HD = $arg1;
     }
     
+    // Getters...
     public function getCPU()
     {
         // returns... if you wanted echos..
