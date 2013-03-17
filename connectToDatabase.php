@@ -39,7 +39,9 @@ else
 if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This if check is looking to see if the query is TRUE.
     
     $info = mysqli_fetch_array($result);
-   
+    $howManyFieldsInDatabase = mysqli_num_fields($result);
+    
+    
     printf("<table border=1><tr>");
    
     while ($fieldInfo = mysqli_fetch_field($result)) {
@@ -47,14 +49,7 @@ if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This 
         printf("<td>%s</td>", $fieldInfo->name);
 
     }
-   
-    printf("</tr><tr>");
-   
-   for ($i = 0; $i < 8; $i++)
-{ 
-        printf("<td>%s</td>", $info[$i]);      
-}
-   printf("</tr></table>");  
+     
      
 //   $info = mysqli_fetch_array($result);  // Original location
 //  From here below was the prototype for the above code
@@ -76,7 +71,38 @@ if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This 
 else
     printf("<br>Failure selecting rows\n");
     
-
+// New stuffs about multi_query - Experiment
+     if (mysqli_multi_query($link, "SELECT * FROM productDetails")) {
+    do {
+        
+        /* store first result set */
+        if ($result = mysqli_use_result($link)) {
+            while ($row = mysqli_fetch_row($result)) {
+                printf("<tr>");
+            for ($i = 0; $i < $howManyFieldsInDatabase; $i++) {
+                printf("<td>%s</td>", $row[$i]);
+            }
+            printf("</tr>");
+            }
+            mysqli_free_result($result);
+        }
+        printf("</table>");
+        /* print divider */
+        if (mysqli_more_results($link)) {
+            printf("-----------------\n");
+        }
+    } while (mysqli_next_result($link));
+}
+/*
+$result = $link->query('SELECT * FROM productDetails');
+while ($row = $result->fetch_assoc()) {
+    for ($i = 0; $i < 20; $i++) {
+     echo $row[$i];
+    }
+}
+ 
+ */
+ 
 // New stuffs:
 $info = mysqli_fetch_array(mysqli_query($link, "SELECT * FROM productDetails"));
 
