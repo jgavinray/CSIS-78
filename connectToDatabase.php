@@ -50,21 +50,6 @@ if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This 
 
     }
      
-     
-//   $info = mysqli_fetch_array($result);  // Original location
-//  From here below was the prototype for the above code
-/*
-   printf("<p>%s", $info['ID']);
-    printf("<br>Name: %s", $info['name']);
-    printf("<br>Lot: %s", $info['lot']);
-    printf("<br>Batch Size: %s", $info['batchSize']);
-    printf("<br>Number in Batch: %s", $info['numberInBatch']);
-    printf("<br>Target Weight: %s", $info['targetWeight']);
-    printf("<br>Actual Weight: %s", $info['actualWeight']);
-    printf("<br>Time: %s", $info['dateTime']);
-    printf("<br>Select returned %d rows.\n", mysqli_num_rows($result));
-    printf("<br>Select returned %d fields.\n", mysqli_num_fields($result));
-*/    
     /* free result set */
     mysqli_free_result($result);
 }
@@ -93,19 +78,7 @@ else
         }
     } while (mysqli_next_result($link));
 }
-/*
-$result = $link->query('SELECT * FROM productDetails');
-while ($row = $result->fetch_assoc()) {
-    for ($i = 0; $i < 20; $i++) {
-     echo $row[$i];
-    }
-}
  
- */
- 
-// New stuffs:
-$info = mysqli_fetch_array(mysqli_query($link, "SELECT * FROM productDetails"));
-
 
 
 /* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
