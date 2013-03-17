@@ -26,11 +26,6 @@ else
     printf("<br>Failure creating the table\n");
 
 //  Auto generating a table via MySQL by J. Gavin Ray on 3/16/2013
-//  To be done to this, the for loop use to fill the table has a static
-//  number of 8 (which may or may not change).  However the for loop
-//  that displays the contents of the loaded array only loops once.
-//  Another for loop with a variable declaration for the maximum iterations
-//  will need to be implemented to ensure that the table is populated properly.
 
 //  Also I should probably do away completely with the table and implement CSS
 //  styles in place so that they can be easier modified and adjusted.
@@ -42,11 +37,11 @@ if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This 
     $howManyFieldsInDatabase = mysqli_num_fields($result);
     
     
-    printf("<table border=1><tr>");
+    printf("<table border=1>\n<tr>");
    
     while ($fieldInfo = mysqli_fetch_field($result)) {
 
-        printf("<td>%s</td>", $fieldInfo->name);
+        printf("<td>%s</td>\n", $fieldInfo->name);
 
     }
      
@@ -63,11 +58,11 @@ else
         /* store first result set */
         if ($result = mysqli_use_result($link)) {
             while ($row = mysqli_fetch_row($result)) {
-                printf("<tr>");
+                printf("<tr>\n");
             for ($i = 0; $i < $howManyFieldsInDatabase; $i++) {
                 printf("<td>%s</td>", $row[$i]);
             }
-            printf("</tr>");
+            printf("\n</tr>\n");
             }
             mysqli_free_result($result);
         }
