@@ -72,7 +72,7 @@ else
     printf("<br>Failure selecting rows\n");
     
 // New stuffs about multi_query - Experiment
-     if (mysqli_multi_query($link, "SELECT * FROM productDetails")) {
+     if (mysqli_multi_query($link, "SELECT * FROM productDetails ORDER BY ID")) {
     do {
         
         /* store first result set */
