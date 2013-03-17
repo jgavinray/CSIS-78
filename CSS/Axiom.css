@@ -6,7 +6,6 @@
 /*  expidite my project in CSIS-78 (Websites in PHP and     */
 /*  SQL) for the Spring 2013 semester.                      */
 
-/*  3/17/2013 - J. Gavin Ray                                */
 /*  The purpose of these CSS styles is to create a general  */
 /*  tag that can be called in a PHP project without having  */
 /*  to be overly concerned about its implementation.        */
@@ -14,7 +13,8 @@
 .navigation {
 position: absolute;
 margin-top: 10px;
-border-right: 2px solid #002969;
+border-right: 2px solid #AAAAAA;
+/* border-right: 2px solid #002969; */
 width: 10%;
 height: 600px;
 z-index: 25;
@@ -48,7 +48,9 @@ margin-bottom: -15px;
 
 body {
 color: #AAAAAA;
-background-color: #2c4081;
+background-image:url('background.png');
+background-color:#cccccc;
+/*background-color: #2c4081; */ /* Original Blue Background */
 margin-top: 2%;
 margin-right: 10%;
 margin-bottom: 2%;
