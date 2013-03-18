@@ -1,12 +1,11 @@
 <?php
+//  Created by J. Gavin Ray on 2/13/13.
+//  Copyright (c) 2013 J. Gavin Ray. All rights reserved.
+//  Last Update on 3/18/13 by J. Gavin Ray
 
 $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
-//  Opening and Closing the HTML Tag for the Navigation
-echo '<div class="navigation">'."Test</div>\n";
-//  Opening the HTML Tag for the Content
-echo '<div class="content">';
 $link = mysqli_connect("localhost", "root", "", "product");
 
 /* check connection */
@@ -17,6 +16,11 @@ if (mysqli_connect_errno()) {
 else
     echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
 
+//  Opening and Closing the HTML Tag for the Navigation
+echo '<div class="navigation">'."Test</div>\n";
+
+//  Opening the HTML Tag for the Content
+echo '<div class="content">';
 
 if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {    // Creates a temporary table in memory
 //if (mysqli_query($link, "CREATE TABLE secondTest LIKE Test") === TRUE) {      // This creates a permanent tables
