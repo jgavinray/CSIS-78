@@ -4,7 +4,7 @@ $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
 //  Opening and Closing the HTML Tag for the Navigation
-echo '<div class="navigation">'."<ul>\n<li>Test</li>\n</ul>\n</div>\n";
+echo '<div class="navigation">'."Test</div>\n";
 //  Opening the HTML Tag for the Content
 echo '<div class="content">';
 $link = mysqli_connect("localhost", "root", "", "product");
@@ -15,7 +15,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 else
-    echo '<p>Great Success... '.mysqli_get_host_info($link)."</p>\n"; 
+    echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
 
 
 if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {    // Creates a temporary table in memory
