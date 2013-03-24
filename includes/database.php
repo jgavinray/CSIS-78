@@ -6,7 +6,7 @@ class database {
         private $mysqli;
         private $result;
         
-        public function __construct($host = "localhost", $user = "root", $password = "", $databaseName = "cars") {
+        public function __construct($host = "localhost", $user = "root", $password = "", $databaseName) {
             $this->mysqli = mysqli_connect($host, $user, $password, $databaseName);
             if (!$this->mysqli) {
                 die('ConnectError('. mysqli_error($this->mysqli).')');
