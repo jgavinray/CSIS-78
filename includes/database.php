@@ -6,7 +6,7 @@ class database {
         private $mysqli;
         private $result;
         
-        public function __construct($host = "localhost", $user = "root", $password = "", $databaseName) {
+        public function __construct($host = "localhost", $user = "root", $password = "", $databaseName = "users") {
             $this->mysqli = mysqli_connect($host, $user, $password, $databaseName);
             if (!$this->mysqli) {
                 die('ConnectError('. mysqli_error($this->mysqli).')');
@@ -36,6 +36,7 @@ class database {
             return $returnSet;
         }
         
+
         public function getNumberOfRecords() {
             return mysqli_num_rows($this->result);
         }

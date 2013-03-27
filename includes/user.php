@@ -50,6 +50,34 @@ class user
     {
         return $this->accountLocked;
     }
+
+    public function searchDBByLogin($searchLogin)
+        {
+            //echo $searchLogin;
+            $DB = new database();
+            $query = "SELECT * FROM `userData` WHERE `login` LIKE '$searchLogin'";
+            $DB->doQuery($query);
+            $resultSet[] = $DB->GetData();
+            foreach($resultSet as $record)
+            {
+                $id     = $record['ID'];
+                $login  = $record['login'];
+                $firstName  = $record['firstName'];
+                $lastName  = $record['lastName'];
+            
+                echo $id;
+                echo $login;
+                echo $firstName;
+                echo $lastName;
+                
+            }
+        
+            $DB->destroy();
+
+        }
+    
+    
+
     
 }
 ?>
