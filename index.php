@@ -6,6 +6,7 @@
         <title>Team Axiom's Live Inventory System</title>
     </head>
     <body>
+    <a href="register.html" target="_blank">Register</a> 
 <!--
 <img class="right" src="http://www.gavwebclass.com/fall2011/jray/gav.gif" alt="Gavilan College Logo" height="91" width="75"> 
 -->
