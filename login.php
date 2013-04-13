@@ -7,8 +7,9 @@ $passwordFromHTML = $_POST['password'];
 $loginCheck = new database();
 $checkUser = new user();
 
-$loginCheck->getNumberOfRecords();
+//$loginCheck->getNumberOfRecords();
 echo $loginFromHTML;
-$checkUser->searchDBByLogin($loginFromHTML);       
+$loginCheck->doQuery("SELECT * FROM `userData` WHERE `login` LIKE '$arg'");
+
 
 ?>
