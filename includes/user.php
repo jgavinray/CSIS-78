@@ -53,22 +53,38 @@ class user
 
     public function searchDBByLogin($searchLogin)
         {
-            //echo $searchLogin;
+
+ // New Stuffs       
+        $link = mysqli_connect("localhost", "root", "", "users");            
+
+
+
+
+ // End New Stuffs
+
+//echo $searchLogin;
             $DB = new database();
             $query = "SELECT * FROM `userData` WHERE `login` LIKE '$searchLogin'";
             $DB->doQuery($query);
-            $resultSet[] = $DB->getData();
+            $resultSet = $DB->getData();
             foreach($resultSet as $record)
             {
                 $id     = $record['ID'];
-                $login  = $record['login'];
                 $firstName = $record['firstName'];
                 $lastName  = $record['lastName'];
+                $login  = $record['login'];
+                $password = $record['password'];
+                $account = $record['accountLocked'];
+                $accessible = $record['accessibleDatabase'];
                 
-                echo $id;
-                echo $login;
-                echo $firstName;
-                echo $lastName;
+                
+                echo "$id";
+                echo "$login";
+                echo "$firstName";
+                echo "$lastName";
+                echo "$password";
+                echo "$account";
+                echo "$accessible";
                 
             }
             

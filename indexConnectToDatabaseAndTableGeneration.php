@@ -6,8 +6,9 @@
 $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
-$link = mysqli_connect("localhost", "root", "", "product");
 
+$link = mysqli_connect("localhost", "root", "", "product");
+//$link = mysqli_connect("localhost", "root", "", "users");
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -36,6 +37,7 @@ else
 
 /* Select queries return a resultset */
 if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This if check is looking to see if the query is TRUE.
+//if ($result = mysqli_query($link, "SELECT * FROM userData")) {    // This if check is looking to see if the query is TRUE.
     
     $info = mysqli_fetch_array($result);
     $howManyFieldsInDatabase = mysqli_num_fields($result);
@@ -56,7 +58,9 @@ else
     printf("<br>Failure selecting rows\n");
     
 // New stuffs about multi_query - Experiment
-     if (mysqli_multi_query($link, "SELECT * FROM productDetails ORDER BY ID")) {
+//if (mysqli_multi_query($link, "SELECT * FROM userData ORDER BY login")) {
+if (mysqli_multi_query($link, "SELECT * FROM productDetails ORDER BY ID")) {
+
     do {
         
         /* store first result set */
