@@ -5,7 +5,6 @@ class database {
 
         private $mysqli;
         private $result;
-        private $test;
         
         public function __construct($host = "localhost", $user = "root", $password = "", $databaseName = "users") {
             $this->mysqli = mysqli_connect($host, $user, $password, $databaseName);
@@ -37,14 +36,7 @@ class database {
             return $returnSet;
         }
         
-        public function searchDBByLogin($arg) {
-            
-            $query  = mysqli_query($this->mysqli,"SELECT * FROM `userData` WHERE `login` LIKE '$arg'");
-            if (!$this->result) {
-                echo "Could not run Query ($query)" . mysqli_error($this->mysqli) . "\n";
-            }
-            echo $arg;
-        }
+        
         
 /*
         public function getNumberOfRecords() {

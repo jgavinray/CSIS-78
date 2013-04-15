@@ -57,26 +57,34 @@ class user
             $DB = new database();
             $query = "SELECT * FROM `userData` WHERE `login` LIKE '$searchLogin'";
             $DB->doQuery($query);
-            $resultSet[] = $DB->GetData();
+            $resultSet[] = $DB->getData();
             foreach($resultSet as $record)
             {
                 $id     = $record['ID'];
                 $login  = $record['login'];
-                $firstName  = $record['firstName'];
+                $firstName = $record['firstName'];
                 $lastName  = $record['lastName'];
-            
+                
                 echo $id;
                 echo $login;
                 echo $firstName;
                 echo $lastName;
                 
             }
-        
+            
             $DB->destroy();
 
         }
     
-    
+    public function printData()
+        {
+            echo "<br>".$this->ID;
+            echo "<br>".$this->firstName;
+            echo "<br>".$this->lastName;
+            echo "<br>".$this->login;
+            echo "<br>".$this->password;
+        }
+
 
     
 }
