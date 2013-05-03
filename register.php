@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($_SESSION)) 
+{
+  session_start();
+}
+
 include "./includes/database.php";
 include "./includes/user.php";
 
@@ -22,6 +27,14 @@ VALUES (
 NULL ,  '$firstName',  '$lastName',  '$Login',  '$Password',  '',  ''
 );";
 $reg->doQuery($query);
+$_SESSION['isLoggedIn'] = TRUE;
+    $_SESSION['firstName'] = $firstName;
+    $_SESSION['lastName'] = $lastName;
+    //$_SESSION['login'] = $loginCheck->getLogin();
+    //$_SESSION['password'] = $loginCheck->getPassword();
+    //$_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
 
-   echo "Welcome ".$firstName." ".$lastName."! </i> <br> Username: <i>".$Login."</i> Password: <i>".$Password."</i>!";
+header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+
+   
 ?>

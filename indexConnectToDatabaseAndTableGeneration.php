@@ -3,13 +3,29 @@
 //  Copyright (c) 2013 J. Gavin Ray. All rights reserved.
 //  Last Update on 3/18/13 by J. Gavin Ray
 
+// Session stuffs as of 4/23/13
+
+if (!isset($_SESSION)) 
+{
+  session_start();
+}
+if (!isset($_SESSION['isLoggedIn'])) 
+{
+    header("Location: ./");
+}
+
+
 $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
-
+echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>!<br>";
+echo '<a href="logout.php" target="_blank">Logout</a><br>';
 $link = mysqli_connect("localhost", "root", "", "product");
 //$link = mysqli_connect("localhost", "root", "", "users");
 /* check connection */
+
+
+
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();

@@ -29,6 +29,11 @@ class user
 
     
     //  Getters...
+    public function getID()
+    {
+        return $this->ID;
+    }
+
     public function getFirstName()
     {
         return $this->firstName;
@@ -54,6 +59,7 @@ class user
     public function searchDBByLogin($searchLogin)
         {
             $DB = new database();
+//            $query = "SELECT * FROM `userData` WHERE `login` LIKE '$searchLogin' and `password` LIKE '$searchPassword'";
             $query = "SELECT * FROM `userData` WHERE `login` LIKE '$searchLogin'";
             $DB->doQuery($query);
             $resultSet = $DB->getData();
@@ -61,6 +67,7 @@ class user
             // Check to see if the $searchLogin variable returns Null
             if (!$resultSet)
                 {
+                    $DB->destroy();
                     return;
                 }
             // If Something is returned, load the data into the object instance.
@@ -76,18 +83,46 @@ class user
                             $accountLocked          = $record['accountLocked'];
                             $accessibleDatabase     = $record['accessibleDatabase'];
 
-                            $this->ID               = $id;
-                            $this->firstName        = $firstName;
-                            $this->lastName         = $lastName;
-                            $this->login            = $login;
-                            $this->password         = $password;
-                            $this->accountLocked    = $accountLocked;
+                            $this->ID                   = $id;
+                            $this->firstName            = $firstName;
+                            $this->lastName             = $lastName;
+                            $this->login                = $login;
+                            $this->password             = $password;
+                            $this->accountLocked        = $accountLocked;
+                            $this->accessibleDatabase   = $accessibleDatabase;
                             
                         }
             }
             $DB->destroy();
 
         }
+        
+    public function validateLogin($searchLogin, $searchPassword)
+    {
+        $loginCheck = new user();
+        $loginCheck->searchDBByLogin($searchLogin); 
+            if ($searchLogin === $loginCheck->getLogin())
+               {
+                   if  ($searchPassword === $loginCheck->getPassword())
+                       {
+                            return TRUE;
+
+                       }
+                   else
+                       {
+                   
+                           return FALSE;
+
+                       }
+               }
+           else
+               {
+                   
+                   return FALSE;
+               }
+      
+        
+    }
     
     public function printData()
         {
@@ -97,7 +132,7 @@ class user
             echo "<br>$this->login";
             echo "<br>$this->password";
         }
-
+    
 
     
 }
