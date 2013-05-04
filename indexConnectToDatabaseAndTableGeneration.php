@@ -19,7 +19,7 @@ $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
 echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>! ";
-echo '<a href="logout.php" target="_blank">Logout</a><br>';
+echo '<a href="logout.php" target="_blank">Logout</a><br><br>';
 echo '<div class="topbar">';
 $link = mysqli_connect("localhost", "root", "", "product");
 //$link = mysqli_connect("localhost", "root", "", "users");
