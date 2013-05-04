@@ -18,8 +18,9 @@ if (!isset($_SESSION['isLoggedIn']))
 $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
-echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>!<br>";
+echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>! ";
 echo '<a href="logout.php" target="_blank">Logout</a><br>';
+echo '<div class="topbar">';
 $link = mysqli_connect("localhost", "root", "", "product");
 //$link = mysqli_connect("localhost", "root", "", "users");
 /* check connection */
@@ -30,13 +31,29 @@ if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
-else
-    echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
-
+//else
+//    echo 'Great Success... '.mysqli_get_host_info($link)."\n"; 
+echo '</div>';
 //  Opening and Closing the HTML Tag for the Navigation
-echo '<div class="navigation">'."Test</div>\n";
+echo '<div class="navigation">'."Sort By<br><br>";
+echo "Time<br><br>";
+echo "<select>";
+echo "<option>Choose Day:</option>\n";
+echo "<option>Monday</option>\n";
+echo "<option>Tuesday</option>\n";
+echo "<option>Wednesday</option>\n";
+echo "<option>Thursday</option>\n";
+echo "<option>Friday</option>\n";
+echo "<option>Saturday</option>\n";
+echo "<option>Sunday</option>\n";
+echo "</select><br><br>\n";
+echo "Show All<br><br>";
+echo "Lot Search<br><br>";
+echo "Name Search<br><br>";
+echo "</div>\n";
 
 //  Opening the HTML Tag for the Content
+/*
 echo '<div class="content">';
 
 if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE productDetails") === TRUE) {    // Creates a temporary table in memory
@@ -45,12 +62,12 @@ if (mysqli_query($link, "CREATE TEMPORARY TABLE productDetailDuplicate LIKE prod
 }
 else
     printf("<br>Failure creating the table\n");
-
+*/
 //  Auto generating a table via MySQL by J. Gavin Ray on 3/16/2013
 
 //  Also I should probably do away completely with the table and implement CSS
 //  styles in place so that they can be easier modified and adjusted.
-
+echo '<div class="content">';
 /* Select queries return a resultset */
 if ($result = mysqli_query($link, "SELECT * FROM productDetails")) {    // This if check is looking to see if the query is TRUE.
 //if ($result = mysqli_query($link, "SELECT * FROM userData")) {    // This if check is looking to see if the query is TRUE.

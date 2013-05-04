@@ -19,6 +19,15 @@ width: 10%;
 height: 600px;
 z-index: 25;
 }
+.topbar {
+    margin-left: 0%;
+    margin-right: 0%;
+    border: 1px solid #AAAAAA;
+    height: 0px;
+    width: 100%;
+    background: #333;
+    
+}
 .content {
 position: absolute;
 padding: 0 0 20px 17%;
