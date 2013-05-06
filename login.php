@@ -57,6 +57,7 @@ if ($loginFromHTML === $loginCheck->getLogin())
     }
 else
     {
+        session_destroy();
         //echo "Please re-enter your login and password";
         header("Location: ./");
         //  Destroy the initialized object and database connection.    

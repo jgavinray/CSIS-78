@@ -6,7 +6,8 @@ include "./includes/html.php";          // Please read this class, it contains a
 include "./includes/database.php";
 include "./includes/user.php";
 
-$thisPage = new HTML;
+$thisPage = new HTML;                   // This method handles all of the opening HTML tags, and ensures that
+                                        // sessions are activated.
 
 $thisPage->connectToProductDatabase();  // This method handles the connection to the database
                                         // if the connection fails, it will display the error and

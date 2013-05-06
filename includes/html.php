@@ -1,6 +1,6 @@
 <?php
 //  Written by J. Gavin Ray on 4/15/13
-//  Updated by J. Gavin Ray on 5/5/13
+//  Updated by J. Gavin Ray on 5/6/13
 class HTML
 {
     
@@ -152,10 +152,13 @@ class HTML
             } 
             while (mysqli_next_result($link));
         }
+    
+        mysqli_close($link);
     }
    
     public function endHtml()
     {
+        
         echo "</body>\n";
         echo "</html>\n";
     }
