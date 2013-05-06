@@ -68,9 +68,33 @@ class HTML
     {
         echo '</div>'; 
     }
+
+    public function connectToProductDatabase()
+    {
+        $link = mysqli_connect("localhost", "root", "", "product");
+        
+        if (mysqli_connect_errno()) 
+        {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }
+
+    }
     
+    public function connectToUsersDatabase()
+    {
+        $link = mysqli_connect("localhost", "root", "", "user");
+        
+        if (mysqli_connect_errno()) 
+        {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }
+
+    }
+
 //  By J. Gavin Ray on 5/5/13 -- Needs testing.
-/*
+
     public function queryAllProductDatabase()
     {
         $link = mysqli_connect("localhost", "root", "", "product");
@@ -129,7 +153,7 @@ class HTML
             while (mysqli_next_result($link));
         }
     }
-*/    
+   
     public function endHtml()
     {
         echo "</body>\n";
