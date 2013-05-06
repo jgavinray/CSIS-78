@@ -24,7 +24,7 @@ class HTML
         echo "<html>";
         echo "<head>";
         echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>";
-        echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
+        echo "<link rel='stylesheet' href='" . $cssFile . "'>";
         echo "<title>Team Axiom's Live Inventory System</title>";
         echo "<body>";
         
@@ -132,8 +132,8 @@ class HTML
 */    
     public function endHtml()
     {
-        echo "</body>";
-        echo "</html>";
+        echo "</body>\n";
+        echo "</html>\n";
     }
 }
 ?>
