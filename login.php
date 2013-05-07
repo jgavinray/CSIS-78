@@ -9,7 +9,7 @@ include "./includes/user.php";
 
 
 $loginFromHTML = $_POST['login'];
-$passwordFromHTML = $_POST['password'];
+$passwordFromHTML = md5($_POST['password']);
 $isLoggedIn = $_SESSION['isLoggedIn'];
 $loginCheck = new user();
 
