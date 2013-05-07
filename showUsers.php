@@ -24,12 +24,9 @@ $thisPage->startContent();              // This method begins the main content o
                                         // to the body.
 
 //  This is the content section, good for passing query information.
-echo "Hopefully this works well!";
-
-//$thisPage->queryAllProductDatabase();   // The query methods require a call of the connectToXDatabase()
-                                        // method before it can be used.
-
 $thisPage->showAllUsers();
+
+$thisPage->manageUsers();
 
 $thisPage->endContent();                // This closes the content section of the page.
 

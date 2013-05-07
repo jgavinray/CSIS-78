@@ -47,13 +47,21 @@ class HTML
         echo "Show All<br><br>";
         echo "Lot Search<br><br>";
         echo "Name Search<br><br>";
+        echo '<a href="logout.php" target="_blank">Logout</a><br><br>';
         echo "</div>\n";
     }
 
     public function adminBar()
     {
-        echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>! ";
-        echo '<a href="logout.php" target="_blank">Logout</a><br><br>';
+        echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>!<br> ";
+        echo "<table align=center border=1>\n<tr>";
+        echo "<td>Import File</td>\n";
+        echo "<td>Manage Tables</td>\n";
+//        echo '<td><a href="showUsers.php" target="_blank">Show Users</a></td>';
+        echo "\n<td>Manage Users</td>\n";
+        echo "<td>Export Displayed Data</td>\n";
+        echo "</tr>\n</table>";
+        echo "<br>";
         echo '<div class="topbar">';
         echo '</div>';
         
@@ -155,7 +163,76 @@ class HTML
     
         mysqli_close($link);
     }
+
+    public function showAllUsers()
+    {
+        $link = mysqli_connect("localhost", "root", "", "users");
+        if ($result = mysqli_query($link, "SELECT * FROM userData")) 
+        {
+        
+            $info = mysqli_fetch_array($result);
+            $howManyFieldsInDatabase = mysqli_num_fields($result);
+    
+    
+            printf("<p><table border=1>\n<tr>");
    
+            while ($fieldInfo = mysqli_fetch_field($result)) 
+            {
+
+                printf("<td>%s</td>\n", $fieldInfo->name);
+
+            }
+     
+        // free result set
+        mysqli_free_result($result);
+        
+        
+        }
+        
+        else
+            printf("<br>Failure selecting rows\n");
+ 
+        if (mysqli_multi_query($link, "SELECT * FROM userData ORDER BY ID")) 
+        {
+
+            do 
+            {
+        
+                // store first result set 
+                if ($result = mysqli_use_result($link)) 
+                {
+                    while ($row = mysqli_fetch_row($result)) 
+                    {
+                        printf("<tr>\n");
+                        for ($i = 0; $i < $howManyFieldsInDatabase; $i++) 
+                        {
+                            printf("<td>%s</td>", $row[$i]);
+                        }
+                        printf("\n</tr>\n");
+                    }
+                    mysqli_free_result($result);
+                }
+                printf("</table></p>\n");
+                // print divider 
+                if (mysqli_more_results($link)) 
+                {
+                    printf("-----------------\n");
+                }
+            } 
+            while (mysqli_next_result($link));
+        }
+    
+        mysqli_close($link);
+    }
+    
+    public function manageUsers()
+    {
+       echo '<form name="registeration" method="POST" action="register.php">';
+       echo '<label>User ID #</label><input type="text" name="ID"/><br/>';
+       echo '<input type="submit" value="Edit">';
+       echo '<input type="submit" value="Delete">';
+       echo '</form>';
+    }
     public function endHtml()
     {
         

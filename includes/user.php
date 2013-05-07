@@ -2,11 +2,14 @@
 
 class user
 {
+    private $ID;
     private $firstName;
     private $lastName;
     private $login;
     private $password;
     private $accountLocked;
+    private $accessibleDatabase;
+    
     
     //  Setters...
     public function setFirstName($arg)
