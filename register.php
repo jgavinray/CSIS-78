@@ -1,9 +1,9 @@
 //  Created by Matt Daily on 4/12/1
-//  Last Update on 4/28/13 by Matt Daily
+//  Last Update on 5/9/13 by Matt Daily
 //  This file declares variables using POST to insert username, first name
 //  last name, and passwords into a MySQL user database. 
 //  It uses the trim function to ignore spaces, the mysql_real_escape_string for 
-//  safer input of sql data, md5 for the passwords
+//  safer input of sql data
 //  if statements check to make sure fields are not left blank
 //  checks to ensure login names are not already in database 
 //  password confirmation
@@ -23,7 +23,7 @@ if(isset($_POST['add']))
 $firstName =trim(mysql_real_escape_string($_POST['firstName']));
 $lastName =trim(mysql_real_escape_string($_POST['lastName']));
 $Login =trim(mysql_real_escape_string($_POST['login']));
-$Password =md5(trim(mysql_real_escape_string($_POST['password'])));
+$Password =trim(mysql_real_escape_string($_POST['password']));
 $Password2 =$_POST['password2'];
 }
 //Dialog Box checker
@@ -84,8 +84,9 @@ $_SESSION['isLoggedIn'] = TRUE;
     //$_SESSION['login'] = $loginCheck->getLogin();
     //$_SESSION['password'] = $loginCheck->getPassword();
     //$_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
-
-header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+echo $_POST['password'];
+echo $Password;
+//header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
 }
 else
 {
