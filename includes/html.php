@@ -47,7 +47,7 @@ class HTML
         echo "Show All<br><br>";
         echo "Lot Search<br><br>";
         echo "Name Search<br><br>";
-        echo '<a href="logout.php" target="_blank">Logout</a><br><br>';
+        echo '<a href="logout.php">Logout</a><br><br>';
         echo "</div>\n";
     }
 
@@ -56,9 +56,9 @@ class HTML
         echo "Welcome Back <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>!<br> ";
         echo "<table align=center border=1>\n<tr>";
         echo "<td>Import File</td>\n";
-        echo "<td>Manage Tables</td>\n";
+        echo '<td><a href="manageTables.php">Manage Tables</a></td>';
 //        echo '<td><a href="showUsers.php" target="_blank">Show Users</a></td>';
-        echo "\n<td>Manage Users</td>\n";
+        echo '<td><a href="showUsers.php">Manage Users</a></td>';
         echo "<td>Export Displayed Data</td>\n";
         echo "</tr>\n</table>";
         echo "<br>";
@@ -227,7 +227,7 @@ class HTML
     
     public function manageUsers()
     {
-       echo '<form name="registeration" method="POST" action="register.php">';
+       echo '<form name="manageUsers" method="POST" action="manageUsers.php">';
        echo '<label>User ID #</label><input type="text" name="ID"/><br/>';
        echo '<input type="submit" value="Edit">';
        echo '<input type="submit" value="Delete">';

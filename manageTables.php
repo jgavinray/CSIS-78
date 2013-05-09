@@ -29,8 +29,6 @@ echo "Hopefully this works well!";
 //$thisPage->queryAllProductDatabase();   // The query methods require a call of the connectToXDatabase()
                                         // method before it can be used.
 
-$thisPage->showAllUsers();
-
 $thisPage->endContent();                // This closes the content section of the page.
 
 $thisPage->endHtml();                   // Closes the HTML tags and general cleanup.
