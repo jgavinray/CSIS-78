@@ -84,9 +84,8 @@ $_SESSION['isLoggedIn'] = TRUE;
     //$_SESSION['login'] = $loginCheck->getLogin();
     //$_SESSION['password'] = $loginCheck->getPassword();
     //$_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
-echo $_POST['password'];
-echo $Password;
-//header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+
+header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
 }
 else
 {
