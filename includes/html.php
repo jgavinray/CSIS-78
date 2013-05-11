@@ -90,6 +90,7 @@ class HTML
     {
         echo '<div class="content">';
         echo "Logged in as: <i>".$_SESSION['firstName']." ".$_SESSION['lastName']."</i>.<br> ";
+    
     }
     
     public function endContent()
