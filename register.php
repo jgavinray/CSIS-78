@@ -1,3 +1,5 @@
+
+<?php
 //  Created by Matt Daily on 4/12/1
 //  Last Update on 5/9/13 by Matt Daily
 //  This file declares variables using POST to insert username, first name
@@ -8,13 +10,17 @@
 //  checks to ensure login names are not already in database 
 //  password confirmation
 //  Starts session
-
-<?php
-
-if (!isset($_SESSION)) 
-{
-  session_start();
-}
+/*
+        
+        if (!isset($_SESSION)) 
+        {
+          session_start();
+        }
+        
+        if (!isset($_SESSION['isLoggedIn'])) 
+        {
+            header("Location: ./");
+        }
 
 include "./includes/database.php";
 include "./includes/user.php";
@@ -92,6 +98,41 @@ else
     echo "Username already exists please go back to the registeration page. <a href='register.html'> here </a>";
 }
 }
+*/
 
+
+
+include "./includes/database.php";
+include "./includes/user.php";
+
+$firstName =$_POST['firstName'];
+$lastName =$_POST['lastName'];
+$Login =$_POST['login'];
+$Password =$_POST['password'];
+
+$reg = new database();
+$query = "INSERT INTO  `users`.`userData` (
+`ID` ,
+`firstName` ,
+`lastName` ,
+`login` ,
+`password` ,
+`accountLocked` ,
+`accessibleDatabase`
+)
+VALUES (
+NULL ,  '$firstName',  '$lastName',  '$Login',  '$Password',  '',  ''
+);";
+$reg->doQuery($query);
+$_SESSION['isLoggedIn'] = TRUE;
+    $_SESSION['firstName'] = $firstName;
+    $_SESSION['lastName'] = $lastName;
+    //$_SESSION['login'] = $loginCheck->getLogin();
+    //$_SESSION['password'] = $loginCheck->getPassword();
+    //$_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
+
+header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+
+   
 
 ?>

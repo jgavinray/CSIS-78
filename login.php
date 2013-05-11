@@ -74,7 +74,7 @@ if (isset($_SESSION['isLoggedIn']))
     //$_SESSION['password'] = $loginCheck->getPassword();
     $_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
 //    $_SESSION['accessibleDatabase'] = $loginCheck->getAccessibleDatabase();
-    header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+    header("Location: ./welcomePage.php");
 }
 
 
