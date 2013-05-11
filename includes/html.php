@@ -246,8 +246,6 @@ class HTML
     }
     public function searchForAndEditUsers()
     {
-        if(isset($_POST['ID']))
-        {
         $ID = $_POST['ID'];
          $link = mysqli_connect("localhost", "root", "", "users");
         if ($result = mysqli_query($link, "SELECT * FROM userData")) 
@@ -295,20 +293,21 @@ class HTML
                     }
                     mysqli_free_result($result);
                 }
-            /*
-             echo '<form name ="lab" Method ="POST" action ="login.php">';
-             echo '<tr><td><input type ="text" name ="login"></td>';
-            echo '<td><input type ="password" name ="password"></td>';
-            echo '<td><input type ="password" name ="password"></td>';
-            echo '<td><input type ="password" name ="password"></td>';
-            echo '<td><input type ="password" name ="password"></td>';
-            echo '<td><input type ="password" name ="password"></td>';
-            echo '<td><input type ="password" name ="password"></td>';
+           
+            echo '<form name ="lab" Method ="POST" action ="updateUser.php">';
+            echo '<tr><td></td>';
+            echo '<td><input type ="text" name ="firstName"></td>';
+            echo '<td><input type ="text" name ="lastName"></td>';
+            echo '<td><input type ="text" name ="login"></td>';
+            echo '<td><input type ="text" name ="password"></td>';
+            echo '<td><input type ="text" name ="accountLocked"></td>';
+            echo '<td><input type ="text" name ="accessibleDatabase"></td>';
+            printf("</table>");
             echo '<input type="Submit" value="Save Changes">';
-            echo '</form></p>';
+            echo '</form>';
+            printf("</p>\n");
             
-             */
-                printf("</table><br>\n");
+            
             /*
                     echo '<form name ="lab" Method ="POST" action ="login.php">';
             echo '<tr><td><input type ="text" name ="login"></td></tr>';
@@ -324,17 +323,18 @@ class HTML
             } 
             while (mysqli_next_result($link));
         }
-        }
-        
-        if(isset($_POST['delete']))
+       // }
+        /*
+        if(isset($_POST['Delete']))
         {
-           $delete = $POST['delete'];
+           $delete = $POST['Delete'];
            $query = "DELETE FROM `users`.`userData` WHERE `userData`.`ID` = $delete";
            $link = mysqli_connect("localhost", "root", "", "users");
            mysqli_multi_query($link, $query);
-           
+           mysqli_close($link);
            
         }
+         */
         mysqli_close($link);
     }
 
@@ -342,8 +342,8 @@ class HTML
     {
        echo '<form name="manageUsers" method="POST" action="manageUsers.php">';
        echo '<label>User ID #</label><input type="text" name="ID"/><br/>';
-       echo '<input type="submit" value="Edit">';
-       echo '<input name="delete" type="submit" value="Delete">';
+       echo '<input type="submit" name="edit" value="Edit">';
+       echo '<input type="submit" name="delete" value="Delete">';
        echo '</form>';
     }
     

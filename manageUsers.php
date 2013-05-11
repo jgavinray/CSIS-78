@@ -24,8 +24,23 @@ $thisPage->startContent();              // This method begins the main content o
                                         // to the body.
 
 //  This is the content section, good for passing query information.
+$ID = $_POST['ID'];
+if ($_POST['edit'])
+     $thisPage->searchForAndEditUsers();
+if ($_POST['delete'])
+{
+    $DB = new database;
+    $query = "DELETE FROM `users`.`userData` WHERE `userData`.`ID` = $ID";
+    $DB->doQuery($query);
+    $DB->destroy();
+    
+    echo "User #".$ID." deleted!";
 
-$thisPage->searchForAndEditUsers();
+    $thisPage->showAllUsers();
+
+    $thisPage->manageUsers();
+}
+
 
 $thisPage->endContent();                // This closes the content section of the page.
 
