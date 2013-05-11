@@ -99,6 +99,10 @@ else
 }
 */
 
+        if (!isset($_SESSION)) 
+        {
+          session_start();
+        }
 
 
 include "./includes/database.php";
@@ -130,7 +134,7 @@ $_SESSION['isLoggedIn'] = TRUE;
     //$_SESSION['password'] = $loginCheck->getPassword();
     //$_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
 
-header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+header("Location: ./welcomePage.php");
 
    
 
