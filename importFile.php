@@ -24,7 +24,7 @@ $thisPage->startContent();              // This method begins the main content o
                                         // to the body.
 
 //  This is the content section, good for passing query information.
-$thisPage->importFile();
+$thisPage->processUpload();
 
 $thisPage->endContent();                // This closes the content section of the page.
 

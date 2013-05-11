@@ -246,6 +246,8 @@ class HTML
     }
     public function searchForAndEditUsers()
     {
+        if(isset($_POST['ID']))
+        {
         $ID = $_POST['ID'];
          $link = mysqli_connect("localhost", "root", "", "users");
         if ($result = mysqli_query($link, "SELECT * FROM userData")) 
@@ -322,6 +324,17 @@ class HTML
             } 
             while (mysqli_next_result($link));
         }
+        }
+        
+        if(isset($_POST['delete']))
+        {
+           $delete = $POST['delete'];
+           $query = "DELETE FROM `users`.`userData` WHERE `userData`.`ID` = $delete";
+           $link = mysqli_connect("localhost", "root", "", "users");
+           mysqli_multi_query($link, $query);
+           
+           
+        }
         mysqli_close($link);
     }
 
@@ -330,7 +343,7 @@ class HTML
        echo '<form name="manageUsers" method="POST" action="manageUsers.php">';
        echo '<label>User ID #</label><input type="text" name="ID"/><br/>';
        echo '<input type="submit" value="Edit">';
-       echo '<input type="submit" value="Delete">';
+       echo '<input name="delete" type="submit" value="Delete">';
        echo '</form>';
     }
     
@@ -349,45 +362,40 @@ class HTML
     
     public function processUpload()
     {
-       
-    //$fileData = $_FILES['upload']['tmp_name'];
-    //$file = fopen($fileData, "r");
 
+        if(is_uploaded_file($_FILES['upload']['tmp_name']))
+        {
+           $DB = new database;
+           $file = fopen($_FILES['upload']['tmp_name'], "r");
 
+            while(!feof($file))
+           {
+               $i = $i + 1;
 
-    if(is_uploaded_file($_FILES['upload']['tmp_name']))
-    {
-       $DB = new database;
-       $file = fopen($_FILES['upload']['tmp_name'], "r");
+               echo "Interation: ".$i."<br>";
+               list($string1, $string2, $string3, $string4) = explode(":", fgets($file));
+               echo "First Name: ".$string1."<br>";
+               echo "Last Name: ".$string2."<br>";
+               echo "Email: ".$string3."<br>";
+               echo "Phone #: ".$string4."<br><br>";
+               $query = "INSERT INTO  `users`.`test` (
+        `ID` ,
+        `fname` ,
+        `lname` ,
+        `email` ,
+        `phone`
+        )
+        VALUES (
+        NULL ,  '$string1',  '$string2',  '$string3',  '$string4'
+        );";
 
-        while(!feof($file))
-       {
-           $i = $i + 1;
-
-           echo "Interation: ".$i."<br>";
-           list($string1, $string2, $string3, $string4) = explode(":", fgets($file));
-           echo "First Name: ".$string1."<br>";
-           echo "Last Name: ".$string2."<br>";
-           echo "Email: ".$string3."<br>";
-           echo "Phone #: ".$string4."<br><br>";
-           $query = "INSERT INTO  `users`.`test` (
-    `ID` ,
-    `fname` ,
-    `lname` ,
-    `email` ,
-    `phone`
-    )
-    VALUES (
-    NULL ,  '$string1',  '$string2',  '$string3',  '$string4'
-    );";
-
-           $DB->doQuery($query);
+               $DB->doQuery($query);
+            }
+            echo "EOF was found";
+            fclose($file);
         }
-        echo "EOF was found";
-        fclose($file);
-    }
-    else
-        echo "No File Uploaded";
+        else
+            echo "No File Uploaded";
     }
     public function endHtml()
     {
