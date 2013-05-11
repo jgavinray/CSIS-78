@@ -1,6 +1,6 @@
 <?php
 //  Written by J. Gavin Ray on 4/15/13
-//  Updated by J. Gavin Ray on 5/6/13
+//  Updated by J. Gavin Ray on 5/8/13
 class HTML
 {
     
@@ -57,7 +57,7 @@ class HTML
         echo "<table align=center border=1>\n<tr>";
         echo "<td>Import File</td>\n";
         echo '<td><a href="manageTables.php">Manage Tables</a></td>';
-//        echo '<td><a href="showUsers.php" target="_blank">Show Users</a></td>';
+//        echo '<td><a href="showUsers.php">Show Users</a></td>';
         echo '<td><a href="showUsers.php">Manage Users</a></td>';
         echo "<td>Export Displayed Data</td>\n";
         echo "</tr>\n</table>";
