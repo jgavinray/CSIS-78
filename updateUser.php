@@ -1,45 +1,4 @@
 <?php
-/*
-include "./includes/database.php";
-//$fileData = $_FILES['upload']['tmp_name'];
-//$file = fopen($fileData, "r");
-
-
-
-if(is_uploaded_file($_FILES['upload']['tmp_name']))
-{
-   $DB = new database;
-   $file = fopen($_FILES['upload']['tmp_name'], "r");
-  
-    while(!feof($file))
-   {
-       $i = $i + 1;
-
-       echo "Interation: ".$i."<br>";
-       list($string1, $string2, $string3, $string4) = explode(":", fgets($file));
-       echo "First Name: ".$string1."<br>";
-       echo "Last Name: ".$string2."<br>";
-       echo "Email: ".$string3."<br>";
-       echo "Phone #: ".$string4."<br><br>";
-       $query = "INSERT INTO  `users`.`test` (
-`ID` ,
-`fname` ,
-`lname` ,
-`email` ,
-`phone`
-)
-VALUES (
-NULL ,  '$string1',  '$string2',  '$string3',  '$string4'
-);";
-
-       $DB->doQuery($query);
-    }
-    echo "EOF was found";
-    fclose($file);
-}
-else
-    echo "No File Uploaded";
-*/
 
 include "./includes/html.php";          // Please read this class, it contains all of
                                         // the objects and methods needed to speed build
@@ -65,7 +24,34 @@ $thisPage->startContent();              // This method begins the main content o
                                         // to the body.
 
 //  This is the content section, good for passing query information.
-$thisPage->processUpload();
+$ID = $_SESSION['workingID'];
+$firstName = $_POST['firstName'];
+$lastName = $_POST['lastName'];
+$login = $_POST['login'];
+$password = $_POST['password'];
+
+//echo "$ID";
+//echo "$firstName";
+//echo "$lastName";
+//echo "$login";
+//echo "$password";
+
+//$query = "UPDATE `userData` SET `userData`.`firstName`='$firstName' WHERE `userData`.`ID` LIKE '$ID'";
+//$query = "REPLACE INTO `users`.`userData` (`ID`, `firstName` , `lastName` , `login` , `password`, `accountLocked` , `accessibleDatabase`) VALUES ('NULL', '$firstName', '$lastName', '$login' , '$password', '','0' ) WHERE '$ID' LIKE ID;";
+
+$link = mysqli_connect("localhost", "root", "", "users");
+mysqli_query($link, "UPDATE `userData` SET `userData`.`firstName`='$firstName' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
+mysqli_query($link, "UPDATE `userData` SET `userData`.`lastName`='$lastName' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
+mysqli_query($link, "UPDATE `userData` SET `userData`.`login`='$login' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
+mysqli_query($link, "UPDATE `userData` SET `userData`.`password`='$password' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
+
+
+//$thisPage->queryAllProductDatabase();   // The query methods require a call of the connectToXDatabase()
+                                        // method before it can be used.
+
+$thisPage->showAllUsers();
+
+$thisPage->manageUsers();
 
 $thisPage->endContent();                // This closes the content section of the page.
 

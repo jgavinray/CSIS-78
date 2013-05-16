@@ -3,8 +3,10 @@
 include "./includes/html.php";          // Please read this class, it contains all of
                                         // the objects and methods needed to speed build
                                         // a page for the website.
-include "./includes/database.php";
-include "./includes/user.php";
+include "./includes/database.php";      // Database class used for queries, used in support of the
+                                        // html class.
+
+include "./includes/user.php";          // User's class, not really used
 
 $thisPage = new HTML;                   // This method handles all of the opening HTML tags, and ensures that
                                         // sessions are activated.
@@ -24,9 +26,12 @@ $thisPage->startContent();              // This method begins the main content o
                                         // to the body.
 
 //  This is the content section, good for passing query information.
-$thisPage->showAllUsers();
+$thisPage->showAllUsers();              // This method generates a table that show the table elements and shows
+                                        // the contents of the table.
 
-$thisPage->manageUsers();
+$thisPage->manageUsers();               // This method generates a text box with edit/delete buttons.
+
+//  End content section.
 
 $thisPage->endContent();                // This closes the content section of the page.
 

@@ -247,6 +247,7 @@ class HTML
     }
     public function searchForAndEditUsers()
     {
+        $_SESSION['workingID'] = $_POST['ID'];
         $ID = $_POST['ID'];
          $link = mysqli_connect("localhost", "root", "", "users");
         if ($result = mysqli_query($link, "SELECT * FROM userData")) 
@@ -307,6 +308,7 @@ class HTML
             echo '<input type="Submit" value="Save Changes">';
             echo '</form>';
             printf("</p>\n");
+            
             
             
             /*
