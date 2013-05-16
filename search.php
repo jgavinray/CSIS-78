@@ -17,13 +17,31 @@ include "./includes/database.php";
  }
 
  else if (isset($_GET['date'])){
- $query .= " WHERE `dateTime` LIKE '".  mysql_real_escape_string($_GET['date'])."'";
+ $query .= " WHERE `date` LIKE '".  mysql_real_escape_string($_GET['date'])."'";
   $fsearch = $_GET['date'];
+ }
+ 
+  else if (isset($_GET['time'])){
+ $query .= " WHERE `time` LIKE '".  mysql_real_escape_string($_GET['time'])."'";
+  $fsearch = $_GET['time'];
  }
  
   else if (isset($_GET['name'])){
  $query .= " WHERE `name` LIKE '%".  mysql_real_escape_string($_GET['name'])."%'";
  $fsearch = $_GET['name'];
+ }
+   else if (isset($_GET['dweek'])){
+       $weekday1 = date("N");
+       
+       $date1 = date("m/d/Y");
+       for($i = 1; $weekday1!=$_GET['dweek']; $i++)//starting with todays date checks if it is the same day of the week as requested. If not go back a day.
+       {
+ 
+$date1 = date("m/d/Y", strtotime("-".$i." day"));
+$weekday1 = date('N', strtotime($date1)); // note: first arg to date() is lower-case L 
+}
+ $query .= " WHERE `date` = '". $date1 ."'";
+ $fsearch = $_GET['dweek'];
  }
 
        if ($result=$mysqli->query($query)) {

@@ -37,19 +37,48 @@ echo '</div>';
 //  Opening and Closing the HTML Tag for the Navigation
 echo '<div class="navigation">'."Sort By<br><br>";
 echo "Time<br><br>";
-echo "<select>";
+echo '<form  method="get" action="search.php"  id="searchform">'; 
+	     
+	   
+echo "<select name='dweek'>";
 echo "<option>Choose Day:</option>\n";
-echo "<option>Monday</option>\n";
-echo "<option>Tuesday</option>\n";
-echo "<option>Wednesday</option>\n";
-echo "<option>Thursday</option>\n";
-echo "<option>Friday</option>\n";
-echo "<option>Saturday</option>\n";
-echo "<option>Sunday</option>\n";
+echo "<option value='1'>Monday</option>\n";
+echo "<option value='2'>Tuesday</option>\n";
+echo "<option value='3'>Wednesday</option>\n";
+echo "<option value='4'>Thursday</option>\n";
+echo "<option value='5'>Friday</option>\n";
+echo "<option value='6'>Saturday</option>\n";
+echo "<option value='7'>Sunday</option>\n";
 echo "</select><br><br>\n";
+echo '<input  type="submit" name="submit" value="Search">
+ </form> ';
 echo "Show All<br><br>";
+
+echo "Date Search<br><br>";
+echo '<form  method="get" action="search.php"  id="searchform"> 
+	      <input  type="text" name="date"> 
+	      <input  type="submit" name="submit" value="Search"> 
+	    </form> ';
+
+echo "Time Search<br><br>";
+echo '<form  method="get" action="search.php"  id="searchform"> 
+	      <input  type="text" name="time"> 
+	      <input  type="submit" name="submit" value="Search"> 
+	    </form> ';
+
 echo "Lot Search<br><br>";
+echo '<form  method="get" action="search.php"  id="searchform"> 
+	      <input  type="text" name="lot"> 
+	      <input  type="submit" name="submit" value="Search"> 
+	    </form> ';
+
 echo "Name Search<br><br>";
+echo '<form  method="get" action="search.php"  id="searchform"> 
+	      <input  type="text" name="name"> 
+	      <input  type="submit" name="submit" value="Search"> 
+	    </form> ';
+
+
 echo "</div>\n";
 
 //  Opening the HTML Tag for the Content
@@ -95,7 +124,9 @@ else
 if (mysqli_multi_query($link, "SELECT * FROM productDetails ORDER BY ID")) {
 
     do {
-        
+        if(mysqli_more_results($link)) {
+        mysqli_next_result($link);
+        }
         /* store first result set */
         if ($result = mysqli_use_result($link)) {
             while ($row = mysqli_fetch_row($result)) {
@@ -112,7 +143,7 @@ if (mysqli_multi_query($link, "SELECT * FROM productDetails ORDER BY ID")) {
         if (mysqli_more_results($link)) {
             printf("-----------------\n");
         }
-    } while (mysqli_next_result($link));
+    } while (mysqli_more_results($link));
 }
  
 
