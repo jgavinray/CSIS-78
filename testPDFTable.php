@@ -19,9 +19,9 @@ mysql_connect('localhost','root','');
 mysql_select_db('product');
 
 $pdf=new PDF();
-$pdf->AddPage();
+//$pdf->AddPage();
 //First table: put all columns automatically
-$pdf->Table('select * from productDetails order by ID');
+//$pdf->Table('select * from productDetails order by ID');
 $pdf->AddPage();
 //Second table: specify 3 columns
 

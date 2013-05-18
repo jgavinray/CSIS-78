@@ -34,27 +34,33 @@ class HTML
     {
         echo '<div class="navigation">'."Sort By<br><br>";
         echo "Time<br><br>";
-        echo "<select>";
-        echo "\t<option>Choose Day:</option>\n";
-        echo "\t<option>Monday</option>\n";
-        echo "\t<option>Tuesday</option>\n";
-        echo "\t<option>Wednesday</option>\n";
-        echo "\t<option>Thursday</option>\n";
-        echo "\t<option>Friday</option>\n";
-        echo "\t<option>Saturday</option>\n";
-        echo "\t<option>Sunday</option>\n";
+        
+        echo '<form  method="get" action="search.php"  id="searchform">'; 
+        echo "<select name='dweek'>";
+        echo "<option>Choose Day:</option>\n";
+        echo "<option value='1'>Monday</option>\n";
+        echo "<option value='2'>Tuesday</option>\n";
+        echo "<option value='3'>Wednesday</option>\n";
+        echo "<option value='4'>Thursday</option>\n";
+        echo "<option value='5'>Friday</option>\n";
+        echo "<option value='6'>Saturday</option>\n";
+        echo "<option value='7'>Sunday</option>\n";
         echo "</select><br><br>\n";
+        echo '<input  type="submit" name="submit" value="Search"></form> ';
+
+        
         echo "Show All<br><br>";
         /*
         echo "Lot Search<br><br>";
         echo "Name Search<br><br>";
         */
+        /*
         echo "Date Search<br><br>";
         echo '<form  method="get" action="search.php"  id="searchform"> 
 	      <input  type="text" name="date"> 
 	      <input  type="submit" name="submit" value="Search"> 
 	    </form> ';
-
+        */
         echo "Lot Search<br><br>";
         echo '<form  method="get" action="search.php"  id="searchform"> 
                   <input  type="text" name="lot"> 

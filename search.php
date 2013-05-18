@@ -1,8 +1,28 @@
-<?php 
+<?php
+/*
 $cssFile = "./CSS/Axiom.css";
 echo "<link rel='stylesheet' href='" . $cssFile . "'>\n";
 
 include "./includes/database.php";
+ */
+
+include "./includes/html.php";          // Please read this class, it contains all of
+                                        // the objects and methods needed to speed build
+                                        // a page for the website.
+include "./includes/database.php";
+include "./includes/user.php";
+
+$thisPage = new HTML;                   // This method handles all of the opening HTML tags, and ensures that
+                                        // sessions are activated.
+$thisPage->adminBar();                  // This method calls a .css styled topbar and populates it
+                                        // with the links and buttons that is bestowed on an admin user.
+
+$thisPage->navigationBar();             // This method generates the left side navigation bar, adjustments
+                                        // to the layout and style of this bar can be made by modifying
+                                        // this method.
+
+$thisPage->startContent();              // This method begins the main content of the page, somewhat similar
+                                        // to the body.
  $mysqli = new mysqli("localhost", "root", "", "product");
  if (mysqli_connect_errno()){
      printf("Connect failed: %s\n", mysqli_connect_error());
@@ -51,6 +71,16 @@ $weekday1 = date('N', strtotime($date1)); // note: first arg to date() is lower-
                  
                      $howManyFieldsInDatabase = mysqli_num_fields($result);
                        echo "<tr>";
+                       // New
+                       while ($fieldInfo = mysqli_fetch_field($result)) 
+                     {
+
+                        printf("<td>%s</td>\n", $fieldInfo->name);
+
+                     }
+                       echo "</tr>";
+                       echo "<tr>";
+                       // End New
                     for ($i = 0; $i < $howManyFieldsInDatabase; $i++) 
                     {
                     
@@ -68,6 +98,8 @@ $weekday1 = date('N', strtotime($date1)); // note: first arg to date() is lower-
 }
    
            $mysqli->close();
+$thisPage->endContent();                // This closes the content section of the page.
 
+$thisPage->endHtml();                   // Closes the HTML tags and general cleanup.
 
-          ?> 
+ ?> 
