@@ -4,8 +4,7 @@
 //  Last Update on 3/18/13 by J. Gavin Ray
 
 // Session stuffs as of 4/23/13
-include "./includes/html.php"; 
-include "./includes/database.php";   
+
 if (!isset($_SESSION)) 
 {
   session_start();
@@ -37,11 +36,7 @@ if (mysqli_connect_errno()) {
 echo '</div>';
 //  Opening and Closing the HTML Tag for the Navigation
 echo '<div class="navigation">'."Sort By<br><br>";
-echo '<form  method="get" action="search.php"  id="searchform"> 
-	 
-	      <input  type="submit" name="all" value="Show All"> 
-	    </form> ';
-echo "Day of Week<br><br>";
+echo "Time<br><br>";
 echo '<form  method="get" action="search.php"  id="searchform">'; 
 	     
 	   
@@ -57,7 +52,7 @@ echo "<option value='7'>Sunday</option>\n";
 echo "</select><br><br>\n";
 echo '<input  type="submit" name="submit" value="Search">
  </form> ';
-//echo "Show All<br><br>";
+echo "Show All<br><br>";
 
 echo "Date Search<br><br>";
 echo '<form  method="get" action="search.php"  id="searchform"> 
@@ -151,9 +146,7 @@ if (mysqli_multi_query($link, "SELECT * FROM productDetails ORDER BY ID")) {
     } while (mysqli_more_results($link));
 }
  
-$thisPage = new HTML;                   // This method handles all of the opening HTML tags, and ensures that
-                        
-$thisPage->manageProduct();               // This method generates a text box with edit/delete buttons.
+
 
 /* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
 /*
@@ -172,5 +165,4 @@ if ($result = mysqli_query($link, "SELECT ID FROM productDetails", MYSQLI_USE_RE
 mysqli_close($link);
 //  Closing the HTML Tag for the Content
 echo '</div>'; 
-
 ?>
