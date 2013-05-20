@@ -73,6 +73,7 @@ if (isset($_SESSION['isLoggedIn']))
     //$_SESSION['login'] = $loginCheck->getLogin();
     //$_SESSION['password'] = $loginCheck->getPassword();
     $_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
+    $_SESSION['isAdmin'] = $loginCheck->getIsAdmin();
 //    $_SESSION['accessibleDatabase'] = $loginCheck->getAccessibleDatabase();
     header("Location: ./welcomePage.php");
 }

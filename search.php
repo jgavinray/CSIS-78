@@ -24,31 +24,39 @@ $thisPage->navigationBar();             // This method generates the left side n
 $thisPage->startContent();              // This method begins the main content of the page, somewhat similar
                                         // to the body.
  $mysqli = new mysqli("localhost", "root", "", "product");
+ $_SESSION['currentDB'] = "product";
+ 
  if (mysqli_connect_errno()){
      printf("Connect failed: %s\n", mysqli_connect_error());
      exit();
  }
  $query = "SELECT * FROM productDetails";
+ $_SESSION['currentQuery'] = $query;
+ 
 
  
  if (isset($_GET['lot'])){
  $query .= " WHERE `lot` LIKE '".  mysql_real_escape_string($_GET['lot'])."'";
  $fsearch = $_GET['lot'];
+ $_SESSION['currentQuery'] = $query;
  }
 
  else if (isset($_GET['date'])){
  $query .= " WHERE `date` LIKE '".  mysql_real_escape_string($_GET['date'])."'";
   $fsearch = $_GET['date'];
+  $_SESSION['currentQuery'] = $query;
  }
  
   else if (isset($_GET['time'])){
  $query .= " WHERE `time` LIKE '".  mysql_real_escape_string($_GET['time'])."'";
   $fsearch = $_GET['time'];
+  $_SESSION['currentQuery'] = $query;
  }
  
   else if (isset($_GET['name'])){
  $query .= " WHERE `name` LIKE '%".  mysql_real_escape_string($_GET['name'])."%'";
  $fsearch = $_GET['name'];
+ $_SESSION['currentQuery'] = $query;
  }
    else if (isset($_GET['dweek'])){
        $weekday1 = date("N");

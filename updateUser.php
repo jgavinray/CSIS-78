@@ -29,6 +29,8 @@ $firstName = $_POST['firstName'];
 $lastName = $_POST['lastName'];
 $login = $_POST['login'];
 $password = $_POST['password'];
+$isAdmin = $_POST['isAdmin'];
+$accountLocked = $_POST['accountLocked'];
 
 //echo "$ID";
 //echo "$firstName";
@@ -44,6 +46,8 @@ mysqli_query($link, "UPDATE `userData` SET `userData`.`firstName`='$firstName' W
 mysqli_query($link, "UPDATE `userData` SET `userData`.`lastName`='$lastName' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
 mysqli_query($link, "UPDATE `userData` SET `userData`.`login`='$login' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
 mysqli_query($link, "UPDATE `userData` SET `userData`.`password`='$password' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
+mysqli_query($link, "UPDATE `userData` SET `userData`.`isAdmin`='$isAdmin' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
+mysqli_query($link, "UPDATE `userData` SET `userData`.`accountLocked`='$accountLocked' WHERE `userData`.`ID` LIKE '$ID'") or die(mysql_error()); 
 
 
 //$thisPage->queryAllProductDatabase();   // The query methods require a call of the connectToXDatabase()

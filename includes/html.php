@@ -1,6 +1,6 @@
 <?php
 //  Written by J. Gavin Ray on 4/15/13
-//  Updated by J. Gavin Ray on 5/8/13
+//  Updated by J. Gavin Ray on 5/18/13
 class HTML
 {
     
@@ -32,7 +32,9 @@ class HTML
     
     public function navigationBar()
     {
-        echo '<div class="navigation">'."Sort By<br><br>";
+        echo '<div class="navigation">';
+        echo "Sort By<br><br>";
+        /*
         echo "Time<br><br>";
         
         echo '<form  method="get" action="search.php"  id="searchform">'; 
@@ -47,9 +49,12 @@ class HTML
         echo "<option value='7'>Sunday</option>\n";
         echo "</select><br><br>\n";
         echo '<input  type="submit" name="submit" value="Search"></form> ';
-
-        
-        echo "Show All<br><br>";
+*/
+        echo '<form  method="get" action="search.php"  id="searchform"> 
+	 
+	      <input  type="submit" name="all" value="Show All"> 
+	    </form> ';
+        //echo "Show All<br><br>";
         /*
         echo "Lot Search<br><br>";
         echo "Name Search<br><br>";
@@ -79,16 +84,26 @@ class HTML
 
     public function adminBar()
     {
+        if ($_SESSION['isAdmin'] < 1)
+        {
+            echo "";
+        }
+        else
+        {
+        //echo '<div=class ".speclink">';
         echo "<table align=center border=1>\n<tr>";
         echo '<td><a href="importFile.php">Import File</td>';
-        echo '<td><a href="manageTables.php">Manage Tables</a></td>';
+        echo '<td><a href="addProduct.php">Input Data</a></td>';
+//        echo '<td><a href="manageTables.php">Manage Tables</a></td>';
 //        echo '<td><a href="showUsers.php">Show Users</a></td>';
         echo '<td><a href="showUsers.php">Manage Users</a></td>';
-        echo "<td>Export Displayed Data</td>\n";
+        echo '<td><a href="exportPDF.php">Export Displayed Data</td>';
         echo "</tr>\n</table>";
         echo "<br>";
+        //echo "</div>";
         echo '<div class="topbar">';
         echo '</div>';
+        }
         
     }
     
@@ -132,8 +147,11 @@ class HTML
 
     public function queryAllProductDatabase()
     {
+        $_SESSION['currentDB'] = "product";
         $link = mysqli_connect("localhost", "root", "", "product");
-        if ($result = mysqli_query($link, "SELECT * FROM productDetails")) 
+        $query = "SELECT * FROM productDetails";
+        $_SESSION['currentQuery'] = $query;
+        if ($result = mysqli_query($link, $query)) 
         {
         
             $info = mysqli_fetch_array($result);
@@ -193,8 +211,11 @@ class HTML
 
     public function showAllUsers()
     {
+        $_SESSION['currentDB'] = "users";
+        $query = "SELECT * FROM userData";
+        $_SESSION['currentQuery'] = $query;
         $link = mysqli_connect("localhost", "root", "", "users");
-        if ($result = mysqli_query($link, "SELECT * FROM userData")) 
+        if ($result = mysqli_query($link, $query)) 
         {
         
             $info = mysqli_fetch_array($result);
@@ -308,8 +329,8 @@ class HTML
             echo '<td><input type ="text" name ="lastName"></td>';
             echo '<td><input type ="text" name ="login"></td>';
             echo '<td><input type ="text" name ="password"></td>';
+            echo '<td><input type ="text" name ="isAdmin"></td>';
             echo '<td><input type ="text" name ="accountLocked"></td>';
-            echo '<td><input type ="text" name ="accessibleDatabase"></td>';
             printf("</table>");
             echo '<input type="Submit" value="Save Changes">';
             echo '</form>';
@@ -379,6 +400,23 @@ class HTML
 
             while(!feof($file))
            {
+                $i = $i + 1;
+
+               list($string1, $string2, $string3, $string4, $string5, $string6) = explode(",", fgets($file));
+               $query = "INSERT INTO  `product`.`productDetails` (
+        `ID` ,
+        `name` ,
+        `lot` ,
+        `batchSize` ,
+        `numberInBatch`,
+        `targetWeight`,
+        `actualWeight`,
+        `dateTime`
+        )
+        VALUES (
+        NULL ,  '$string1',  '$string2',  '$string3',  '$string4', '$string5', '$string6', 'Now'
+        );";
+                /*
                $i = $i + 1;
 
                echo "Interation: ".$i."<br>";
@@ -397,10 +435,12 @@ class HTML
         VALUES (
         NULL ,  '$string1',  '$string2',  '$string3',  '$string4'
         );";
-
+*/
                $DB->doQuery($query);
             }
-            echo "EOF was found";
+            echo "File Uploaded<br>";
+            echo $i." rows were added to the table.<br>";
+            $this->queryAllProductDatabase();
             fclose($file);
         }
         else

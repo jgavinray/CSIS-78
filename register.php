@@ -9,8 +9,7 @@
 //  checks to ensure login names are not already in database 
 //  password confirmation
 //  Starts session
-/*
-        
+/*        
         if (!isset($_SESSION)) 
         {
           session_start();
@@ -90,14 +89,17 @@ $_SESSION['isLoggedIn'] = TRUE;
     //$_SESSION['password'] = $loginCheck->getPassword();
     //$_SESSION['accountLocked'] = $loginCheck->getAccountLocked();
 
-header("Location: ./indexConnectToDatabaseAndTableGeneration.php");
+header("Location: ./welcomePage.php");
 }
 else
 {
     echo "Username already exists please go back to the registeration page. <a href='register.html'> here </a>";
 }
 }
+
 */
+
+// Stuff by Gavin
 
         if (!isset($_SESSION)) 
         {
@@ -120,8 +122,8 @@ $query = "INSERT INTO  `users`.`userData` (
 `lastName` ,
 `login` ,
 `password` ,
-`accountLocked` ,
-`accessibleDatabase`
+`isAdmin` ,
+`accountLocked`
 )
 VALUES (
 NULL ,  '$firstName',  '$lastName',  '$Login',  '$Password',  '',  ''

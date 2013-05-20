@@ -24,6 +24,12 @@ $thisPage->startContent();              // This method begins the main content o
                                         // to the body.
 
 //  This is the content section, good for passing query information.
+
+echo "<p>Instructions:<br><br>Click on the choose file button to select a comma delimited file on your computer to upload ";
+echo "the data contained within the file into the product database on this server.  After the file has been selected click on the submit button.</p>";
+
+// End content section.
+
 $thisPage->importFile();
 
 $thisPage->endContent();                // This closes the content section of the page.

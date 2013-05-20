@@ -8,7 +8,7 @@ class user
     private $login;
     private $password;
     private $accountLocked;
-    private $accessibleDatabase;
+    private $isAdmin;
     
     
     //  Setters...
@@ -58,6 +58,10 @@ class user
     {
         return $this->accountLocked;
     }
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
 
     public function searchDBByLogin($searchLogin)
         {
@@ -85,6 +89,7 @@ class user
                             $password               = $record['password'];
                             $accountLocked          = $record['accountLocked'];
                             $accessibleDatabase     = $record['accessibleDatabase'];
+                            $isAdmin     = $record['isAdmin'];
 
                             $this->ID                   = $id;
                             $this->firstName            = $firstName;
@@ -93,6 +98,7 @@ class user
                             $this->password             = $password;
                             $this->accountLocked        = $accountLocked;
                             $this->accessibleDatabase   = $accessibleDatabase;
+                            $this->isAdmin              = $isAdmin;
                             
                         }
             }
